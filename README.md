@@ -245,9 +245,9 @@ git add .
 git commit -m "Initial portfolio commit"
 git push origin main
 
-# Enable GitHub Pages in repository settings
-# Settings > Pages > Select main branch > Save
-# Your portfolio will be available at: https://username.github.io/portfolio
+# GitHub Actions will deploy the site automatically from `.github/workflows/pages.yml`
+# If required, enable Pages in repository settings and choose "GitHub Actions" as the source
+# Your portfolio will be available at the Pages URL shown in the repository settings
 ```
 
 ### **2. Netlify**
