@@ -267,6 +267,48 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// ==================== MOBILE BOTTOM NAV ====================
+// Create a simple bottom nav for quick access on phones
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNav = document.createElement('nav');
+    mobileNav.className = 'mobile-bottom-nav';
+    mobileNav.innerHTML = `
+        <a href="#home" aria-label="Home"><i class="bi bi-house"></i></a>
+        <a href="#projects" aria-label="Projects"><i class="bi bi-layout-text-window-reverse"></i></a>
+        <a href="#contact" aria-label="Contact"><i class="bi bi-envelope"></i></a>
+    `;
+    document.body.appendChild(mobileNav);
+
+    const links = mobileNav.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 70;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // highlight mobile nav on scroll
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        links.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) link.classList.add('active');
+        });
+    });
+});
+
 // ==================== ANIMATION PERFORMANCE OPTIMIZATION ====================
 // Pause animations on mobile devices if needed
 if (window.matchMedia('(max-width: 768px)').matches) {
